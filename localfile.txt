@@ -1,1 +1,2 @@
 local file's text
+line 2
