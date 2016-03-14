@@ -1,0 +1,11 @@
+some test
+add text for second commit for this file
+again
+line 4
+asdf
+continue experiment
+<<<<<<< 9effb4826df97f36b02c5a29622c0f7aeb80a36e
+#comment
+=======
+asdf
+>>>>>>> asdf
