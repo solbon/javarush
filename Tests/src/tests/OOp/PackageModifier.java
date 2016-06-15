@@ -1,4 +1,4 @@
-package tests.OOP;
+package tests.oop;
 
 /**
  * Created by admin on 05.02.2016.

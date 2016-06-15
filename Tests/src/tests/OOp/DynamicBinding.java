@@ -1,11 +1,11 @@
-package tests.OOP;
+package tests.oop;
 
 /**
  * Created by solbon on 25.11.2014.
  */
 public class DynamicBinding {
     public static void main(String[] args) {
-        A x = new C();
+        tests.oop.A x = new tests.oop.C();
         x.doIt();
     }
 }
@@ -16,12 +16,12 @@ class A {
 
 
 }
-class B extends A {
+class B extends tests.oop.A {
     void doIt() {
         System.out.println("B");
     }
 }
-class C extends B{
+class C extends tests.oop.B {
     void doIt() {
         System.out.println("C");
     }

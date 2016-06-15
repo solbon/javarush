@@ -1,4 +1,4 @@
-package tests.OOP;
+package tests.oop;
 
 /**
  * Created by solbon on 08.12.2014.
