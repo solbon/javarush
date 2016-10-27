@@ -28,13 +28,14 @@ public class Solution {
             Human somePerson = new Human();
             somePerson.load(inputStream);
             //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
+            System.out.println(somePerson.equals(ivanov));
             inputStream.close();
 
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("Oops, something wrong with my file");
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("Oops, something wrong with save/load method");
         }
     }
@@ -56,10 +57,53 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            PrintWriter writer = new PrintWriter(outputStream);
+            writer.println("human");
+            writer.println(name);
+            for (Asset a : assets) {
+                writer.println("asset");
+                writer.println(a.getName());
+                writer.println(a.getPrice());
+            }
+            writer.flush();
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String isHuman = reader.readLine();
+            if ("human".equals(isHuman)) {
+                 name = reader.readLine();
+            }
+            String isAsset;
+            while (!((isAsset = reader.readLine()) == null)) {
+                if ("asset".equals(isAsset)) {
+                    String name = reader.readLine();
+                    double price = Double.parseDouble(reader.readLine());
+                    Asset asset = new Asset(name);
+                    asset.setPrice(price);
+                    assets.add(asset);
+                }
+            }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Human human = (Human) o;
+
+            if (!name.equals(human.name)) return false;
+            return assets != null ? assets.size() == human.assets.size() : human.assets == null;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = name.hashCode();
+            result = 31 * result + (assets != null ? assets.hashCode() : 0);
+            return result;
         }
     }
 }
