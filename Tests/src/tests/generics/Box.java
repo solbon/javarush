@@ -22,9 +22,9 @@ public class Box<T> {
         System.out.println(u.getClass().getName());
     }
 
-    public <? extends Number> void addNumber() {
-        return null;
-    }
+//    public <? extends Number> void addNumber() {
+//        return null;
+//    }
 
     public static void main(String[] args) {
         Box<String> b = new Box<>();
