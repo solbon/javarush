@@ -30,6 +30,7 @@ public class Solution {
 
             loadedObject.load(inputStream);
             //check here that classWithStatic object equals to loadedObject object - проверьте тут, что classWithStatic и loadedObject равны
+            System.out.println(classWithStatic.equals(loadedObject));
 
             outputStream.close();
             inputStream.close();
@@ -50,10 +51,45 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            PrintWriter writer = new PrintWriter(outputStream);
+            String hasStaticString = (staticString != null) ? "yes" : "no";
+            writer.println(hasStaticString);
+            if ("yes".equals(hasStaticString))
+                writer.println(staticString);
+            writer.println(i);
+            writer.println(j);
+            writer.flush();
+            writer.close();
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String hasStaticString = reader.readLine();
+            if ("yes".equals(hasStaticString))
+                staticString = reader.readLine();
+            i = Integer.valueOf(reader.readLine());
+            j = Integer.valueOf(reader.readLine());
+            reader.close();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ClassWithStatic that = (ClassWithStatic) o;
+
+            if (i != that.i) return false;
+            return j == that.j;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = i;
+            result = 31 * result + j;
+            return result;
         }
     }
 }
